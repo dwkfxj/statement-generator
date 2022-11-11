@@ -1,0 +1,43 @@
+<idea-plugin>
+    <id>com.github.dwkfxj.statement-generator</id>
+
+    <name>Statement Generator</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="475538698@qq.com" url="https://github.com/dwkfxj/code-generator">dongwk</vendor>
+
+    <description>
+        A code generator to speed up coding
+    </description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="com.github.dwkfxj.statementgenerator.NotificationGroup"
+                           displayType="BALLOON"
+                           key="com.github.dwkfxj.statementgenerator.NotificationGroup"/>
+    </extensions>
+
+    <actions>
+        <group id="com.github.dwkfxj.statementgenerator.ProjectViewPopupMenuGroup">
+            <action class="com.github.dwkfxj.statementgenerator.GenAssignStatementAction"
+                    id="com.github.dwkfxj.statementgenerator.GenAssignStatementAction"
+                    icon="AllIcons.Actions.Copy"
+                    text="Copy Assign Statement"
+                    description="Generate Assign Statement and copy to the clipboard">
+            </action>
+            <add-to-group group-id="CutCopyPasteGroup" anchor="last"/>
+        </group>
+        <group id="com.github.dwkfxj.statementgenerator.EditorPopupMenuGroup">
+            <action class="com.github.dwkfxj.statementgenerator.GenAssignStatementAction"
+                    id="com.github.dwkfxj.statementgenerator.EditorPopupMenuDefaultAction"
+                    icon="AllIcons.Actions.Copy"
+                    text="Copy Assign Statement"
+                    description="Generate Assign Statement and copy to the clipboard">
+            </action>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </group>
+    </actions>
+</idea-plugin>

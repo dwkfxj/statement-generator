@@ -4,15 +4,14 @@ import com.github.dwkfxj.statementgenerator.ClipboardHandler;
 import com.github.dwkfxj.statementgenerator.Notifier;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.psi.PsiField;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.uast.UClass;
+import org.jetbrains.uast.UField;
 
 import javax.swing.*;
 
 import java.awt.*;
+import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,23 +27,19 @@ public class GenAssignStatementConfigDialog extends DialogWrapper {
     private JPanel selectedFieldsPanel;
 
     private final Project project;
-    private final UClass outerClass;
-    private final UClass uClass;
 
     public GenAssignStatementConfigDialog(Project project,UClass outerClass,UClass uClass) {
         super(true);
         this.project = project;
-        this.outerClass = outerClass;
-        this.uClass = uClass;
         setTitle("Generate Assign Statement Configure");
         targetClassName.setText(outerClass == null ? uClass.getName() : String.join(".",outerClass.getName(),uClass.getName()));
         targetClassName.setEditable(false);
         targetVarName.setText(createTargetVariableNameByClassName(uClass.getName()));
         sourceVarName.setText(createSourceVariableNameByClassName(uClass.getName()));
-        PsiField[] psiFields =  uClass.getAllFields();
-        for(int i =0;i< psiFields.length;i++){
-            JCheckBox fieldCheckBox = new JCheckBox(psiFields[i].getName());
-            fieldCheckBox.setName("fieldCheckBox"+psiFields[i].getName());
+        UField[] fields =  uClass.getFields();
+        for(int i =0;i< fields.length;i++){
+            JCheckBox fieldCheckBox = new JCheckBox(fields[i].getName());
+            fieldCheckBox.setName("fieldCheckBox"+fields[i].getName());
             fieldCheckBox.setSelected(true);
             fieldCheckBox.setVisible(true);
             selectedFieldsPanel.add(fieldCheckBox);

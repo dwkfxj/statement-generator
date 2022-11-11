@@ -35,10 +35,11 @@ public class ChooseClassDialog extends DialogWrapper {
         uClassMap.put(outerClass.getName(),outerClass);
         for(int i = 0;i<innerClasses.length;i++){
             UClass innerClass = innerClasses[i];
-            JRadioButton innerClassRadioButton = new JRadioButton(innerClass.getQualifiedName());
+            String innerClassName = String.join(".",outerClass.getName(),innerClass.getName());
+            JRadioButton innerClassRadioButton = new JRadioButton(innerClassName);
             buttonGroup.add(innerClassRadioButton);
             choosePanel.add(innerClassRadioButton);
-            uClassMap.put(innerClass.getQualifiedName(),innerClass);
+            uClassMap.put(innerClassName,innerClass);
         }
         init();
     }

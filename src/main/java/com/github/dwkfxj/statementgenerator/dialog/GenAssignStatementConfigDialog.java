@@ -37,7 +37,7 @@ public class GenAssignStatementConfigDialog extends DialogWrapper {
         this.outerClass = outerClass;
         this.uClass = uClass;
         setTitle("Generate Assign Statement Configure");
-        targetClassName.setText(outerClass == null ? uClass.getName() : uClass.getQualifiedName());
+        targetClassName.setText(outerClass == null ? uClass.getName() : String.join(".",outerClass.getName(),uClass.getName()));
         targetClassName.setEditable(false);
         targetVarName.setText(createTargetVariableNameByClassName(uClass.getName()));
         sourceVarName.setText(createSourceVariableNameByClassName(uClass.getName()));

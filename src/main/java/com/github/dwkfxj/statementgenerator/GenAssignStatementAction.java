@@ -1,27 +1,20 @@
 package com.github.dwkfxj.statementgenerator;
 
+import com.github.dwkfxj.statementgenerator.dialog.ChooseClassDialog;
+import com.github.dwkfxj.statementgenerator.dialog.GenAssignStatementConfigDialog;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtil;
-import com.intellij.ui.popup.PopupComponent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.uast.UClass;
-import org.jetbrains.uast.UElement;
-import org.jetbrains.uast.UVariable;
-import org.jetbrains.uast.UastContextKt;
 import org.jetbrains.uast.UastLanguagePlugin;
 import org.jetbrains.uast.UastUtils;
 
-import java.text.MessageFormat;
 import java.util.Arrays;
 
 /**
@@ -60,8 +53,14 @@ public class GenAssignStatementAction extends AnAction {
         }
         PsiElement elementAt = psiFile.findElementAt(offset);
         UClass uClass = UastUtils.findContaining(elementAt, UClass.class);
-        GenAssignStatementConfigDialog configDialog =  new GenAssignStatementConfigDialog(project,uClass);
-        configDialog.show();
+        UClass[] innerClasses =  uClass.getInnerClasses();
+        if(innerClasses.length == 0){
+            GenAssignStatementConfigDialog configDialog =  new GenAssignStatementConfigDialog(project,null, uClass);
+            configDialog.show();
+        }else{
+            ChooseClassDialog chooseClassDialog =  new ChooseClassDialog(project,uClass,innerClasses);
+            chooseClassDialog.show();
+        }
     }
 
     public boolean uastSupported(@NotNull final PsiFile psiFile) {

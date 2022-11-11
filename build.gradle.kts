@@ -1,10 +1,10 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.8.0"
+    id("org.jetbrains.intellij") version "1.9.0"
 }
 
 group = "com.github.dwkfxj"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()

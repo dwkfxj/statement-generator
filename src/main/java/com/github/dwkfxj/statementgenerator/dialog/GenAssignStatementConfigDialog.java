@@ -1,5 +1,7 @@
-package com.github.dwkfxj.statementgenerator;
+package com.github.dwkfxj.statementgenerator.dialog;
 
+import com.github.dwkfxj.statementgenerator.ClipboardHandler;
+import com.github.dwkfxj.statementgenerator.Notifier;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.psi.PsiField;
@@ -26,14 +28,16 @@ public class GenAssignStatementConfigDialog extends DialogWrapper {
     private JPanel selectedFieldsPanel;
 
     private final Project project;
+    private final UClass outerClass;
     private final UClass uClass;
 
-    public GenAssignStatementConfigDialog(Project project,UClass uClass) {
+    public GenAssignStatementConfigDialog(Project project,UClass outerClass,UClass uClass) {
         super(true);
         this.project = project;
+        this.outerClass = outerClass;
         this.uClass = uClass;
         setTitle("Generate Assign Statement Configure");
-        targetClassName.setText(uClass.getName());
+        targetClassName.setText(outerClass == null ? uClass.getName() : uClass.getQualifiedName());
         targetClassName.setEditable(false);
         targetVarName.setText(createTargetVariableNameByClassName(uClass.getName()));
         sourceVarName.setText(createSourceVariableNameByClassName(uClass.getName()));
@@ -71,7 +75,7 @@ public class GenAssignStatementConfigDialog extends DialogWrapper {
 
     private void copyAssignStatement(List<String> fieldNames){
         ClipboardHandler.copyToClipboard(buildContent(fieldNames));
-        Notifier.info("Copy Assign Statements Success,Enjoy it!", project);
+        Notifier.info("Copy Assign Statements Success, Enjoy it!", project);
 
     }
 

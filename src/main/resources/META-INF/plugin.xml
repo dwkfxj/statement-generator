@@ -27,6 +27,12 @@
                     text="Copy Assign Statement"
                     description="Generate Assign Statement and copy to the clipboard">
             </action>
+            <action class="com.github.dwkfxj.statementgenerator.InsertAnnotationAction"
+                    id="com.github.dwkfxj.statementgenerator.InsertAnnotationAction"
+                    icon="AllIcons.Actions.MenuPaste"
+                    text="Insert Annotations"
+                    description="Auto insert annotations">
+            </action>
             <add-to-group group-id="CutCopyPasteGroup" anchor="last"/>
         </group>
         <group id="com.github.dwkfxj.statementgenerator.EditorPopupMenuGroup">
@@ -35,6 +41,12 @@
                     icon="AllIcons.Actions.Copy"
                     text="Copy Assign Statement"
                     description="Generate Assign Statement and copy to the clipboard">
+            </action>
+            <action class="com.github.dwkfxj.statementgenerator.InsertAnnotationAction"
+                    id="com.github.dwkfxj.statementgenerator.EditorInsertAnnotationAction"
+                    icon="AllIcons.Actions.MenuPaste"
+                    text="Insert Annotations"
+                    description="Auto insert annotations">
             </action>
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </group>

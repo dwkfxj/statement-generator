@@ -4,10 +4,14 @@ plugins {
 }
 
 group = "com.github.dwkfxj"
-version = "1.0.1"
+version = "1.1.0"
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    implementation("cn.hutool:hutool-all:5.8.10")
 }
 
 // Configure Gradle IntelliJ Plugin
